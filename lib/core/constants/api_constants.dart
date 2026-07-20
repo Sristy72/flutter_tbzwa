@@ -88,8 +88,22 @@ class SocketEndpoint {
   final String voiceRoomJoin = "voiceroom:join";
   final String voiceRoomLeave = "voiceroom:leave";
   final String voiceRoomParticipantsUpdated = "voiceroom:participants_updated";
+  final String voiceRoomMessage = "voiceroom:message";
   final String voiceRoomStageInvite = "voiceroom:stage_invite";
+  final String voiceRoomStageInvitationCreated =
+      "voiceroom:stage_invitation_created";
+  final String voiceRoomStageInvitationAccepted =
+      "voiceroom:stage_invitation_accepted";
+  final String voiceRoomStageInvitationDeclined =
+      "voiceroom:stage_invitation_declined";
+  final String voiceRoomStageInvitationCancelled =
+      "voiceroom:stage_invitation_cancelled";
   final String voiceRoomStageChanged = "voiceroom:stage_changed";
+  final String voiceRoomStageDeclined = "voiceroom:stage_declined";
+  final String voiceRoomStageRemoved = "voiceroom:stage_removed";
+  final String voiceRoomStageLeft = "voiceroom:stage_left";
+  final String voiceRoomStageMuted = "voiceroom:stage_muted";
+  final String voiceRoomRtcSignal = "voiceroom:rtc_signal";
   final String voiceRoomGift = "voiceroom:gift";
   final String roomClosed = "room:closed";
   final String classStarted = "class:started";
@@ -371,6 +385,15 @@ class VoiceRoomEndpoints {
   String room(String id) => '$_base/$id';
   String join(String id) => '$_base/$id/join';
   String leave(String id) => '$_base/$id/leave';
+  String messages(String id) => '$_base/$id/messages';
+  String stageInvite(String id) => '$_base/$id/stage-invite';
+  String stageInviteAccept(String id, String invitationId) =>
+      '$_base/$id/stage-invite/$invitationId/accept';
+  String stageInviteDecline(String id, String invitationId) =>
+      '$_base/$id/stage-invite/$invitationId/decline';
+  String stageRemove(String id) => '$_base/$id/stage-remove';
+  String stageLeave(String id) => '$_base/$id/stage-leave';
+  String stageMute(String id) => '$_base/$id/stage-mute';
 }
 
 class NotificationEndpoints {
