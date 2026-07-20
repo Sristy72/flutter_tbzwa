@@ -65,4 +65,55 @@ void main() {
     expect(eligibility.requiredPlan, 'immersion_plus_plus');
     expect(eligibility.endDate, isNotNull);
   });
+
+  test('parses voice-room messages with sender labels and attachments', () {
+    final page = VoiceRoomMessagePage.fromJson(
+      {
+        'messages': [
+          {
+            'id': 'message-1',
+            'roomId': 'room-1',
+            'clientMessageId': 'client-1',
+            'content': 'Good morning!',
+            'type': 'text',
+            'roleLabel': 'Host',
+            'isHost': true,
+            'createdAt': '2026-07-20T09:00:00.000Z',
+            'sender': {
+              'id': 'host-1',
+              'fullName': 'Kathy Onana',
+              'role': 'instructor',
+              'country': 'US',
+              'profileImageUrl': '/uploads/kathy.png',
+            },
+          },
+          {
+            'id': 'message-2',
+            'roomId': 'room-1',
+            'content': '',
+            'type': 'document',
+            'createdAt': '2026-07-20T09:01:00.000Z',
+            'sender': {'id': 'learner-1', 'fullName': 'Alice Martin'},
+            'mediaFile': {
+              'url': '/uploads/rooms/notes.pdf',
+              'type': 'document',
+              'filename': 'notes.pdf',
+              'mimeType': 'application/pdf',
+              'size': 1234,
+            },
+          },
+        ],
+      },
+      {'page': 1, 'limit': 30, 'total': 2, 'totalPages': 1},
+      'learner-1',
+    );
+
+    expect(page.messages, hasLength(2));
+    expect(page.messages.first.roleLabel, 'Host');
+    expect(page.messages.first.isMine, isFalse);
+    expect(page.messages.last.isMine, isTrue);
+    expect(page.messages.last.attachment?.type, 'document');
+    expect(page.messages.last.attachment?.displayName, 'notes.pdf');
+    expect(page.messages.last.preview, 'Document');
+  });
 }
