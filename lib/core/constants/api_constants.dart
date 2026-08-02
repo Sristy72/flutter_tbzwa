@@ -6,7 +6,8 @@ class ApiConstants {
 
   // static const String baseDomain = 'http://187.77.187.56:5006'; // Office VPS
 
-  static const String baseDomain = 'http://10.10.26.124:5008'; // soykot
+  // static const String baseDomain = 'http://10.10.26.124:5008';
+   static const String baseDomain = 'https://backend-tbz-wa-alke-ilgb.onrender.com';  // soykot
 
   static const String baseUrl = '$baseDomain/api/v1';
   static const String graphqlEndpoint = '$baseDomain/graphql';
